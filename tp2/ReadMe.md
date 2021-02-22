@@ -146,12 +146,8 @@ Autrement dit, le développeur déclare qu’une lecture va être suivie d’une
 | t7|```SELECT ENAME, SAL FROM EMP WHERE ENAME IN ('Mohamed','Hichem', 'Maaoui');```| ------ |Maaoui, Mohamed 3800, Hichem 4000(session2 n'a pas effectuer le commit|
 | t8| ------ |```SELECT ENAME, SAL FROM EMP WHERE ENAME IN ('Mohamed','Hichem', 'Maaoui');```|Maaoui, Mohamed 3800(session 1 a enregistré), Hichem 5000|
 | t9| ```Commit;``` |------|commit complete|
-| t10|```SELECT ENAME, SAL FROM EMP WHERE ENAME IN ('Mohamed','Hichem', 'Maaoui');```| ------ |Maaoui
-Mohamed          3800
-Hichem           4000|
-| t11| ------ |```SELECT ENAME, SAL FROM EMP WHERE ENAME IN ('Mohamed','Hichem', 'Maaoui');```|Maaoui
-Mohamed          3800
-Hichem           5000|
+| t10|```SELECT ENAME, SAL FROM EMP WHERE ENAME IN ('Mohamed','Hichem', 'Maaoui');```| ------ |Maaoui, Mohamed 3800, Hichem  4000|
+| t11| ------ |```SELECT ENAME, SAL FROM EMP WHERE ENAME IN ('Mohamed','Hichem', 'Maaoui');```|Maaoui,Mohamed  3800, Hichem 5000|
 | t12| ------ | ```COMMIT;```|commit complete|
 | t13| ``` UPDATE EMP SET SAL = 5000 WHERE ENAME ='Maaoui'; ``` |------|1 row updated|
 | t14| ------ |```SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;```|Transaction set.|
@@ -159,15 +155,11 @@ Hichem           5000|
 | t16| ```COMMIT;``` |------|session1->commit complete, session2->can't serialize access for this transaction|
 | t17| ------ |```ROLLBACK;```|rollback complete|
 | t18| ------ |```SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;```|Transaction set|
-| t19| ------ |```SELECT ENAME, SAL FROM EMP WHERE ENAME IN ('Mohamed','Hichem', 'Maaoui');```|Maaoui           5000
-Mohamed          3800
-Hichem           4000|
+| t19| ------ |```SELECT ENAME, SAL FROM EMP WHERE ENAME IN ('Mohamed','Hichem', 'Maaoui');```|Maaoui 5000, Mohamed 3800,Hichem 4000|
 | t20| ``` UPDATE EMP SET SAL = 5200 WHERE ENAME ='Maaoui'; ``` |------|1 row updated|
 | t21| ```COMMIT;``` |------|commit complete|
 | t22| ------ | ```COMMIT;```|commit complete|
-| t23| ------ |```SELECT ENAME, SAL FROM EMP WHERE ENAME IN ('Mohamed','Hichem', 'Maaoui');```|Maaoui           5200
-Mohamed          3800
-Hichem           4000|
+| t23| ------ |```SELECT ENAME, SAL FROM EMP WHERE ENAME IN ('Mohamed','Hichem', 'Maaoui');```|Maaoui 5200, Mohamed 3800,Hichem 4000|
 
 
 
